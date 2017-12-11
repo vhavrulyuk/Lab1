@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
 <GridPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
@@ -16,13 +13,13 @@
       <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
    </rowConstraints>
    <children>
-      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="517.0" prefWidth="600.0" >
+      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="517.0" prefWidth="600.0">
          <children>
             <ListView fx:id="discreteData" layoutX="35.0" layoutY="21.0" prefHeight="292.0" prefWidth="120.0" />
-            <Button fx:id="removeData" layoutX="35.0" layoutY="393.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" text="Видалити" />
+            <Button fx:id="removeData" onAction="#removeExistingData" layoutX="35.0" layoutY="393.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" text="Видалити" />
             <TextField fx:id="newVarianta" layoutX="35.0" layoutY="324.0" prefHeight="25.0" prefWidth="120.0" />
-            <Button fx:id="resetAll" layoutX="35.0" layoutY="426.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" text="Очистити все" />
-            <Button fx:id="addData" layoutX="35.0" layoutY="360.0" mnemonicParsing="false" onAction="#addNewData" prefHeight="25.0" prefWidth="120.0" text="Button" />
+            <Button fx:id="resetAll" onAction="#resetAllControls" layoutX="35.0" layoutY="426.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" text="Очистити все" />
+            <Button fx:id="addData" layoutX="35.0" layoutY="360.0" mnemonicParsing="false" onAction="#addNewData" prefHeight="25.0" prefWidth="120.0" text="Додати елемент" />
          </children>
       </Pane>
    </children>

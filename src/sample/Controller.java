@@ -1,6 +1,5 @@
 package sample;
 
-import com.sun.media.sound.InvalidFormatException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -16,6 +15,9 @@ public class Controller {
     private ListView<Double> discreteData;
     @FXML
     private TextField newVarianta;
+    @FXML
+    private Button resetAll;
+
 
     @FXML
     public void addNewData(ActionEvent event) {
@@ -23,17 +25,34 @@ public class Controller {
         try {
             varianta = Double.parseDouble(newVarianta.getText());
             discreteData.getItems().add(varianta);
-        }catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {
             handleNumberFormatException();
         }
-
     }
 
-    private void handleNumberFormatException(){
+    public void removeExistingData() {
+        final int selectedIndex = discreteData.getSelectionModel().getSelectedIndex();
+        try {
+            discreteData.getItems().remove(selectedIndex);
+        } catch (Exception e) {
+            handleException(e);
+        }
+    }
+
+    public void resetAllControls() {
+        discreteData.getItems().clear();
+    }
+    private void handleNumberFormatException() {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Не число типу Double");
         alert.setContentText("Будь-ласка, введіть число типу Double");
         alert.showAndWait();
     }
 
+    private void handleException(Exception e) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle(e.getClass().getSimpleName());
+        alert.setContentText(e.getMessage());
+        alert.showAndWait();
+    }
 }
