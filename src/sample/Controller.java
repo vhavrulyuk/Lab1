@@ -10,14 +10,15 @@ import javafx.scene.control.TextField;
 
 public class Controller {
     @FXML
-    private Button addData;
+    public Button removeData;
+    @FXML
+    public Button resetAll;
+    @FXML
+    public Button addData;
     @FXML
     private ListView<Double> discreteData;
     @FXML
     private TextField newVarianta;
-    @FXML
-    private Button resetAll;
-
 
     @FXML
     public void addNewData(ActionEvent event) {
