@@ -63,12 +63,13 @@ public class Controller {
         results.clear();
         Double aE = Calculations.averageEmpirical(discreteData);
         Double moda = Calculations.calculateModa(discreteData);
-        printResultToTxt(aE, moda);
-
+        Double mediana = Calculations.mediana(discreteData);
+        printResultToTxt(aE, moda, mediana);
     }
 
-    private void printResultToTxt(double aE, double moda) {
-        String resultText = String.format("Середнє емпіричне: %f\nМода: %f\n", aE, moda)  ;
+    private void printResultToTxt(double aE, double moda, double mediana) {
+        String resultText = String.format("Середнє емпіричне: %f\nМода: %f\n" +
+                "Медіана: %f\n", aE, moda, mediana);
         results.appendText(resultText);
     }
 
