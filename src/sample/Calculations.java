@@ -36,9 +36,18 @@ public class Calculations {
         }
     }
 
-    static Double scope(ListView<Double> list){
+    static Double scope(ListView<Double> list) {
         ArrayList<Double> dList = new ArrayList<>(list.getItems());
-        return Collections.max(dList)-Collections.min(dList);
+        return Collections.max(dList) - Collections.min(dList);
+    }
+
+    static Double empiricalVariance(ListView<Double> list) {
+        double sum = 0;
+        ArrayList<Double> dList = new ArrayList<>(list.getItems());
+        for (Double temp : dList) {
+            sum += Math.pow((temp - averageEmpirical(list)),2);
+        }
+        return sum / dList.size();
     }
 
     private static boolean elementsQuantityisOdd(ListView<Double> list) {

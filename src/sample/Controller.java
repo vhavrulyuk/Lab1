@@ -65,13 +65,15 @@ public class Controller {
         Double moda = Calculations.calculateModa(discreteData);
         Double mediana = Calculations.mediana(discreteData);
         Double scope = Calculations.scope(discreteData);
-        printResultToTxt(aE, moda, mediana, scope);
+        Double empiricalVariance= Calculations.empiricalVariance(discreteData);
+        printResultToTxt(aE, moda, mediana, scope, empiricalVariance);
     }
 
-    private void printResultToTxt(double aE, double moda, double mediana, double scope) {
+    private void printResultToTxt(double aE, double moda, double mediana, double scope, double empiricalVariance) {
         String resultText = String.format("Середнє емпіричне: %f\nМода: %f\n" +
                 "Медіана: %f\n" +
-                "Розмах: %f\n", aE, moda, mediana, scope);
+                "Розмах: %f\n" +
+                "Дисперсія: %f\n", aE, moda, mediana, scope, empiricalVariance);
         results.appendText(resultText);
     }
 
