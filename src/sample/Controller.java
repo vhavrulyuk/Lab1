@@ -64,12 +64,14 @@ public class Controller {
         Double aE = Calculations.averageEmpirical(discreteData);
         Double moda = Calculations.calculateModa(discreteData);
         Double mediana = Calculations.mediana(discreteData);
-        printResultToTxt(aE, moda, mediana);
+        Double scope = Calculations.scope(discreteData);
+        printResultToTxt(aE, moda, mediana, scope);
     }
 
-    private void printResultToTxt(double aE, double moda, double mediana) {
+    private void printResultToTxt(double aE, double moda, double mediana, double scope) {
         String resultText = String.format("Середнє емпіричне: %f\nМода: %f\n" +
-                "Медіана: %f\n", aE, moda, mediana);
+                "Медіана: %f\n" +
+                "Розмах: %f\n", aE, moda, mediana, scope);
         results.appendText(resultText);
     }
 

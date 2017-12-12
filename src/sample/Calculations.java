@@ -15,7 +15,7 @@ public class Calculations {
         return sum / amount;
     }
 
-     static Double calculateModa(ListView<Double> list) {
+    static Double calculateModa(ListView<Double> list) {
         ArrayList<Double> dList = new ArrayList<>(list.getItems());
         Set<Double> uniqueSet = new HashSet<>(list.getItems());
         HashMap<Double, Integer> potentialModa = new HashMap<>();
@@ -25,7 +25,7 @@ public class Calculations {
         return Collections.max(potentialModa.entrySet(), Comparator.comparingInt(Map.Entry::getValue)).getKey();
     }
 
-     static Double mediana(ListView<Double> list) {
+    static Double mediana(ListView<Double> list) {
         ArrayList<Double> dList = new ArrayList<>(list.getItems());
         Collections.sort(dList);
         if (elementsQuantityisOdd(list)) {
@@ -36,7 +36,13 @@ public class Calculations {
         }
     }
 
+    static Double scope(ListView<Double> list){
+        ArrayList<Double> dList = new ArrayList<>(list.getItems());
+        return Collections.max(dList)-Collections.min(dList);
+    }
+
     private static boolean elementsQuantityisOdd(ListView<Double> list) {
         return list.getItems().size() % 2 > 0;
     }
+
 }
