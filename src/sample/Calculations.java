@@ -27,7 +27,6 @@ public class Calculations {
 
      static Double mediana(ListView<Double> list) {
         ArrayList<Double> dList = new ArrayList<>(list.getItems());
-        //ArrayList<Double> testList = new ArrayList<Double>(Arrays.asList(0.35,0.38,0.42,0.47,0.6,0.91,0.89,0.59,0.38,0.27,0.19));
         Collections.sort(dList);
         if (elementsQuantityisOdd(list)) {
             return dList.get(Math.floorDiv(dList.size(), 2));
