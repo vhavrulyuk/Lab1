@@ -4,7 +4,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-
 public class Controller {
     @FXML
     public Button removeData;
@@ -18,6 +17,8 @@ public class Controller {
     private TextField newVarianta;
     @FXML
     private TextArea results;
+    @FXML
+    private Button calculate;
 
     @FXML
     public void addNewData(ActionEvent event) {
@@ -61,12 +62,13 @@ public class Controller {
     public void calcultaAll() {
         results.clear();
         Double aE = Calculations.averageEmpirical(discreteData);
-        printResultToTxt(aE);
+        Double moda = Calculations.calculateModa(discreteData);
+        printResultToTxt(aE, moda);
+
     }
 
-    private void printResultToTxt(double calculatedValue) {
-        String resultText = "";
-        resultText += Calculations.calculatedValue + ": " + calculatedValue + "\n";
+    private void printResultToTxt(double aE, double moda) {
+        String resultText = String.format("Середнє емпіричне: %f\nМода: %f\n", aE, moda)  ;
         results.appendText(resultText);
     }
 
