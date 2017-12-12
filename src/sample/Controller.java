@@ -2,10 +2,7 @@ package sample;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 
 public class Controller {
@@ -19,6 +16,8 @@ public class Controller {
     private ListView<Double> discreteData;
     @FXML
     private TextField newVarianta;
+    @FXML
+    private TextArea results;
 
     @FXML
     public void addNewData(ActionEvent event) {
@@ -42,7 +41,9 @@ public class Controller {
 
     public void resetAllControls() {
         discreteData.getItems().clear();
+        results.clear();
     }
+
     private void handleNumberFormatException() {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Не число типу Double");
@@ -56,4 +57,17 @@ public class Controller {
         alert.setContentText(e.getMessage());
         alert.showAndWait();
     }
+
+    public void calcultaAll() {
+        results.clear();
+        Double aE = Calculations.averageEmpirical(discreteData);
+        printResultToTxt(aE);
+    }
+
+    private void printResultToTxt(double calculatedValue) {
+        String resultText = "";
+        resultText += Calculations.calculatedValue + ": " + calculatedValue + "\n";
+        results.appendText(resultText);
+    }
+
 }
