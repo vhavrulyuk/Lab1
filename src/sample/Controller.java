@@ -65,15 +65,36 @@ public class Controller {
         Double moda = Calculations.calculateModa(discreteData);
         Double mediana = Calculations.mediana(discreteData);
         Double scope = Calculations.scope(discreteData);
-        Double empiricalVariance= Calculations.empiricalVariance(discreteData);
-        printResultToTxt(aE, moda, mediana, scope, empiricalVariance);
+        Double empiricalVariance = Calculations.empiricalVariance(discreteData);
+        Double meanSquareDeviation = Math.sqrt(empiricalVariance);
+        Double correctedEmpiricalVariance = Calculations.correctedEmpiricalVariance(discreteData);
+        Double correctedMeanSquareDeviation = Math.sqrt(correctedEmpiricalVariance);
+        Double variation = meanSquareDeviation / aE;
+        Double asymmetry = Calculations.asymmetry(discreteData);
+        Double excess = Calculations.excess(discreteData);
+        printResultToTxt(aE, moda, mediana, scope, empiricalVariance, meanSquareDeviation, correctedEmpiricalVariance, correctedMeanSquareDeviation, variation, asymmetry, excess);
     }
 
-    private void printResultToTxt(double aE, double moda, double mediana, double scope, double empiricalVariance) {
+    private void printResultToTxt(double aE, double moda, double mediana,
+                                  double scope, double empiricalVariance,
+                                  double meanSquareDeviation, double correctedEmpiricalVariance,
+                                  double correctedMeanSquareDeviation,
+                                  double variation,
+                                  double asymmetry,
+                                  double excess) {
         String resultText = String.format("Середнє емпіричне: %f\nМода: %f\n" +
-                "Медіана: %f\n" +
-                "Розмах: %f\n" +
-                "Дисперсія: %f\n", aE, moda, mediana, scope, empiricalVariance);
+                        "Медіана: %f\n" +
+                        "Розмах: %f\n" +
+                        "Дисперсія: %f\n" +
+                        "Середнє квадратичне відхилення: %f\n" +
+                        "Виправлена дисперсія: %f\n" +
+                        "Виправлене середнє квадратичне відхилення: %f\n" +
+                        "Варіація: %f\n" +
+                        "Асиметрія: %f\n" +
+                        "Ексцес: %f\n", aE, moda, mediana, scope, empiricalVariance,
+                meanSquareDeviation, correctedEmpiricalVariance,
+                correctedMeanSquareDeviation, variation, asymmetry,
+                excess);
         results.appendText(resultText);
     }
 
