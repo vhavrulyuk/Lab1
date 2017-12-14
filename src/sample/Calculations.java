@@ -69,6 +69,17 @@ public class Calculations {
         return sum/dList.size();
     }
 
+    public static Double empiricalStartingPoint(int order, ListView<Double> list){
+        double sum = 0;
+        ArrayList<Double> dList = new ArrayList<>(list.getItems());
+
+        for (Double temp : dList) {
+            sum += Math.pow(temp, order);
+        }
+        return sum/dList.size();
+    }
+
+
     public static Double asymmetry(ListView<Double> list){
         return empiricalCentralPoint(3, list) / Math.pow(Math.sqrt(empiricalVariance(list)),3);
     }

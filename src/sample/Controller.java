@@ -72,7 +72,11 @@ public class Controller {
         Double variation = meanSquareDeviation / aE;
         Double asymmetry = Calculations.asymmetry(discreteData);
         Double excess = Calculations.excess(discreteData);
-        printResultToTxt(aE, moda, mediana, scope, empiricalVariance, meanSquareDeviation, correctedEmpiricalVariance, correctedMeanSquareDeviation, variation, asymmetry, excess);
+        Double v3 = Calculations.empiricalStartingPoint(3, discreteData);
+        Double v4 = Calculations.empiricalStartingPoint(4, discreteData);
+        Double m3 = Calculations.empiricalCentralPoint(3, discreteData);
+        Double m4 = Calculations.empiricalCentralPoint(4, discreteData);
+        printResultToTxt(aE, moda, mediana, scope, empiricalVariance, meanSquareDeviation, correctedEmpiricalVariance, correctedMeanSquareDeviation, variation, asymmetry, excess, v3, v4, m3, m4);
     }
 
     private void printResultToTxt(double aE, double moda, double mediana,
@@ -81,7 +85,12 @@ public class Controller {
                                   double correctedMeanSquareDeviation,
                                   double variation,
                                   double asymmetry,
-                                  double excess) {
+                                  double excess,
+                                  double eSP3,
+                                  double eSP4,
+                                  double cP3,
+                                  double cP4
+                                  ) {
         String resultText = String.format("Середнє емпіричне: %f\nМода: %f\n" +
                         "Медіана: %f\n" +
                         "Розмах: %f\n" +
@@ -91,10 +100,14 @@ public class Controller {
                         "Виправлене середнє квадратичне відхилення: %f\n" +
                         "Варіація: %f\n" +
                         "Асиметрія: %f\n" +
-                        "Ексцес: %f\n", aE, moda, mediana, scope, empiricalVariance,
+                        "Ексцес: %f\n" +
+                        "Початковий момент 3-го порядку: %f\n" +
+                        "Початковий момент 4-го порядку: %f\n" +
+                        "Центральний момент 3-го порядку: %f\n" +
+                        "Центральний момент 4-го порядку: %f\n", aE, moda, mediana, scope, empiricalVariance,
                 meanSquareDeviation, correctedEmpiricalVariance,
                 correctedMeanSquareDeviation, variation, asymmetry,
-                excess);
+                excess, eSP3, eSP4, cP3, cP4);
         results.appendText(resultText);
     }
 
