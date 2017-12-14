@@ -61,7 +61,7 @@ public class Controller {
 
     public void calcultaAll() {
         results.clear();
-        Double aE = Calculations.averageEmpirical(discreteData);
+        Double aE = Calculations.empiricalStartingPoint(1,discreteData);
         Double moda = Calculations.calculateModa(discreteData);
         Double mediana = Calculations.mediana(discreteData);
         Double scope = Calculations.scope(discreteData);

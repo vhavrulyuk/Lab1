@@ -22,7 +22,7 @@ public class TestValues extends ApplicationTest {
 
     @Test
     public void testAvarageEmpirical() {
-        Assert.assertEquals(0.455833333333333, Calculations.averageEmpirical(discreteData), 0.000000000000001);
+        Assert.assertEquals(0.455833333333333, Calculations.empiricalStartingPoint(1, discreteData), 0.000000000000001);
     }
 
     @Test
@@ -37,11 +37,12 @@ public class TestValues extends ApplicationTest {
 
     @Test
     public void testExcess() {
-        Assert.assertEquals(-0.43219583480124, Calculations.empiricalCentralPoint(4, discreteData) / Math.pow(Math.sqrt(Calculations.empiricalVariance(discreteData)), 4)-3, 0.000000000000001);
+        Assert.assertEquals(-0.43219583480124, Calculations.empiricalCentralPoint(4, discreteData) / Math.pow(Math.sqrt(Calculations.empiricalVariance(discreteData)), 4) - 3, 0.000000000000001);
     }
+
     @Test
-    public void testEmpriricalStartingPoint(){
-        Assert.assertEquals(0.186416583333333, Calculations.empiricalStartingPoint(3,discreteData), 0.000000000000001);
-        Assert.assertEquals(0.1422655125, Calculations.empiricalStartingPoint(4,discreteData), 0.0000000001);
+    public void testEmpriricalStartingPoint() {
+        Assert.assertEquals(0.186416583333333, Calculations.empiricalStartingPoint(3, discreteData), 0.000000000000001);
+        Assert.assertEquals(0.1422655125, Calculations.empiricalStartingPoint(4, discreteData), 0.0000000001);
     }
 }

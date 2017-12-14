@@ -5,15 +5,6 @@ import javafx.scene.control.ListView;
 import java.util.*;
 
 public class Calculations {
-    public static double averageEmpirical(ListView<Double> list) {
-        int amount = list.getItems().size();
-
-        double sum = 0;
-        for (Double variant : list.getItems()) {
-            sum += variant;
-        }
-        return sum / amount;
-    }
 
     static Double calculateModa(ListView<Double> list) {
         ArrayList<Double> dList = new ArrayList<>(list.getItems());
@@ -45,7 +36,7 @@ public class Calculations {
         double sum = 0;
         ArrayList<Double> dList = new ArrayList<>(list.getItems());
         for (Double temp : dList) {
-            sum += Math.pow((temp - averageEmpirical(list)), 2);
+            sum += Math.pow((temp - empiricalStartingPoint(1,list)), 2);
         }
         return sum / dList.size();
     }
@@ -55,7 +46,7 @@ public class Calculations {
         ArrayList<Double> dList = new ArrayList<>(list.getItems());
 
         for (Double temp : dList) {
-            sum += Math.pow((temp - averageEmpirical(list)), 2);
+            sum += Math.pow((temp - empiricalStartingPoint(1,list)), 2);
         }
         return sum/(dList.size() - 1);
     }
@@ -64,7 +55,7 @@ public class Calculations {
         ArrayList<Double> dList = new ArrayList<>(list.getItems());
 
         for (Double temp : dList) {
-            sum += Math.pow((temp - averageEmpirical(list)), order);
+            sum += Math.pow((temp - empiricalStartingPoint(1,list)), order);
         }
         return sum/dList.size();
     }
