@@ -2,7 +2,11 @@ package sample;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
+
+import java.util.TreeMap;
 
 public class Controller {
     @FXML
@@ -19,6 +23,16 @@ public class Controller {
     private TextArea results;
     @FXML
     private Button calculate;
+    @FXML
+    private LineChart cumulata;
+
+    @FXML
+    public void buildCumulata(){
+        TreeMap<Double,Integer> chartData = Calculations.prepareDataForCumulata(discreteData);
+        XYChart.Series series = new XYChart.Series<>();
+        chartData.forEach((x, y) -> series.getData().add(new XYChart.Data(x, y)));
+        cumulata.getData().add(series);
+    }
 
     @FXML
     public void addNewData(ActionEvent event) {
@@ -61,6 +75,7 @@ public class Controller {
 
     public void calcultaAll() {
         results.clear();
+        buildCumulata();
         Double aE = Calculations.empiricalStartingPoint(1,discreteData);
         Double moda = Calculations.calculateModa(discreteData);
         Double mediana = Calculations.mediana(discreteData);
