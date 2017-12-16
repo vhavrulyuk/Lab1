@@ -26,6 +26,12 @@ public class TestValues extends ApplicationTest {
     }
 
     @Test
+    public void testprepareDataForCumulata() {
+        Calculations.prepareDataForRelativeCumulata(discreteData);
+        Assert.assertEquals(1, 1);
+    }
+
+    @Test
     public void testEmpiricalCentralPoint3dOrder() {
         Assert.assertEquals(0.00590341782407408, Calculations.empiricalCentralPoint(3, discreteData), 0.00000000000000001);
     }

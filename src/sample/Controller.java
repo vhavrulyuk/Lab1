@@ -2,10 +2,12 @@ package sample;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.chart.BarChart;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 
+import java.util.Collections;
 import java.util.TreeMap;
 
 public class Controller {
@@ -25,13 +27,38 @@ public class Controller {
     private Button calculate;
     @FXML
     private LineChart cumulata;
+    @FXML
+    private LineChart relativeCumulata;
+    @FXML
+    private LineChart polygon;
+    @FXML
+    private LineChart edf;
 
     @FXML
-    public void buildCumulata(){
-        TreeMap<Double,Integer> chartData = Calculations.prepareDataForCumulata(discreteData);
+    public void buildCumulata() {
+        TreeMap<Double, Integer> chartData = Calculations.prepareDataForCumulata(discreteData);
         XYChart.Series series = new XYChart.Series<>();
-        chartData.forEach((x, y) -> series.getData().add(new XYChart.Data(x, y)));
+        chartData.forEach((Double x, Integer y) ->
+                series.getData().add(new XYChart.Data(x, y)));
         cumulata.getData().add(series);
+    }
+
+    @FXML
+    public void buildRelativeCumulata() {
+        TreeMap<Double, Double> chartData = Calculations.prepareDataForRelativeCumulata(discreteData);
+        XYChart.Series series = new XYChart.Series<>();
+        chartData.forEach((Double x, Double y) ->
+                series.getData().add(new XYChart.Data(x, y)));
+        relativeCumulata.getData().add(series);
+    }
+
+    @FXML
+    private void buildPolygon() {
+        TreeMap<Double, Integer> chartData = new TreeMap<>(Calculations.varaintaFrequency(discreteData));
+        XYChart.Series series = new XYChart.Series<>();
+        chartData.forEach((Double x, Integer y) ->
+                series.getData().add(new XYChart.Data(x, y)));
+        polygon.getData().add(series);
     }
 
     @FXML
@@ -57,6 +84,9 @@ public class Controller {
     public void resetAllControls() {
         discreteData.getItems().clear();
         results.clear();
+        cumulata.getData().clear();
+        relativeCumulata.getData().clear();
+        polygon.getData().clear();
     }
 
     private void handleNumberFormatException() {
@@ -76,7 +106,9 @@ public class Controller {
     public void calcultaAll() {
         results.clear();
         buildCumulata();
-        Double aE = Calculations.empiricalStartingPoint(1,discreteData);
+        buildRelativeCumulata();
+        buildPolygon();
+        Double aE = Calculations.empiricalStartingPoint(1, discreteData);
         Double moda = Calculations.calculateModa(discreteData);
         Double mediana = Calculations.mediana(discreteData);
         Double scope = Calculations.scope(discreteData);
@@ -105,7 +137,7 @@ public class Controller {
                                   double eSP4,
                                   double cP3,
                                   double cP4
-                                  ) {
+    ) {
         String resultText = String.format("Середнє емпіричне: %f\nМода: %f\n" +
                         "Медіана: %f\n" +
                         "Розмах: %f\n" +

@@ -15,6 +15,15 @@ public class Calculations {
         return frequency;
     }
 
+    static public HashMap<Double, Double> relativeVaraintaFrequency(ListView<Double> list) {
+        Set<Double> uniqueSet = new HashSet<>(list.getItems());
+        HashMap<Double, Double> relativeFrequency = new HashMap<>();
+        for (Double temp : uniqueSet) {
+            relativeFrequency.put(temp, (double) Collections.frequency(list.getItems(), temp)/list.getItems().size());
+        }
+        return relativeFrequency;
+    }
+
     static public TreeMap<Double, Integer> prepareDataForCumulata(ListView<Double> list) {
         HashMap<Double, Integer> variantaFrequency = varaintaFrequency(list);
         TreeMap<Double, Integer> data = new TreeMap<>(variantaFrequency);
@@ -26,6 +35,19 @@ public class Calculations {
             entry.setValue(sum);
         }
         return data;//new TreeMap<>(variantaFrequency);
+    }
+
+    static public TreeMap<Double, Double> prepareDataForRelativeCumulata(ListView<Double> list) {
+        HashMap<Double, Double> variantaFrequency = relativeVaraintaFrequency(list);
+        TreeMap<Double, Double> data = new TreeMap<>(variantaFrequency);
+        double sum = 0;
+        double currentValue = 0;
+        for (Map.Entry<Double, Double> entry : data.entrySet()           /*Integer v:data.values()*/) {
+            currentValue = entry.getValue();
+            sum+=currentValue;
+            entry.setValue(sum);
+        }
+        return data;
     }
 
     public static Double calculateModa(ListView<Double> list) {

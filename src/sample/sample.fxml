@@ -17,22 +17,46 @@
       <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
    </rowConstraints>
    <children>
-      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="673.0" prefWidth="1087.0">
+      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="673.0" prefWidth="1173.0">
          <children>
             <ListView fx:id="discreteData" layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="120.0" />
             <Button fx:id="removeData" layoutX="14.0" layoutY="290.0" mnemonicParsing="false" onAction="#removeExistingData" prefHeight="25.0" prefWidth="120.0" text="Видалити" />
             <TextField fx:id="newVarianta" layoutX="14.0" layoutY="223.0" prefHeight="25.0" prefWidth="120.0" />
-            <Button fx:id="resetAll" layoutX="14.0" layoutY="322.0" mnemonicParsing="false" onAction="#resetAllControls" prefHeight="25.0" prefWidth="120.0" text="Очистити все" />
+            <Button fx:id="resetAll" layoutX="14.0" layoutY="358.0" mnemonicParsing="false" onAction="#resetAllControls" prefHeight="25.0" prefWidth="120.0" text="Очистити все" />
             <Button fx:id="addData" layoutX="14.0" layoutY="258.0" mnemonicParsing="false" onAction="#addNewData" prefHeight="25.0" prefWidth="120.0" text="Додати елемент" />
             <TextArea fx:id="results" layoutX="143.0" layoutY="14.0" prefHeight="369.0" prefWidth="342.0" />
-            <Button fx:id="calculate" layoutX="14.0" layoutY="356.0" mnemonicParsing="false" onAction="#calcultaAll" prefHeight="25.0" prefWidth="120.0" text="Обчислити" />
-            <LineChart fx:id="cumulata" layoutX="14.0" layoutY="396.0" prefHeight="271.0" prefWidth="377.0" title="Кумулятивна крива за частотами">
+            <Button fx:id="calculate" layoutX="14.0" layoutY="324.0" mnemonicParsing="false" onAction="#calcultaAll" prefHeight="25.0" prefWidth="120.0" text="Обчислити" />
+            <LineChart fx:id="cumulata" layoutX="14.0" layoutY="396.0" legendVisible="false" prefHeight="271.0" prefWidth="377.0" title="Кумулятивна крива за частотами">
               <xAxis>
-                <NumberAxis side="BOTTOM" />
+                <NumberAxis side="BOTTOM" fx:id="xAxis" />
               </xAxis>
               <yAxis>
                 <NumberAxis autoRanging="false" minorTickCount="1" side="LEFT" tickUnit="2.0" upperBound="14.0" />
               </yAxis>
+            </LineChart>
+            <LineChart fx:id="relativeCumulata" layoutX="391.0" layoutY="396.0" legendVisible="false" prefHeight="271.0" prefWidth="377.0" title="Кумулятивна крива за відносними частотами">
+               <xAxis>
+                  <NumberAxis side="BOTTOM" fx:id="xAxis1" />
+               </xAxis>
+               <yAxis>
+                  <NumberAxis autoRanging="false" minorTickCount="1" side="LEFT" tickUnit="2.0" upperBound="1.0" />
+               </yAxis>
+            </LineChart>
+            <LineChart fx:id="polygon" layoutX="768.0" layoutY="396.0" legendVisible="false" prefHeight="271.0" prefWidth="377.0" title="Полігон">
+               <xAxis>
+                  <NumberAxis side="BOTTOM" fx:id="xAxis11" />
+               </xAxis>
+               <yAxis>
+                  <NumberAxis autoRanging="false" minorTickCount="1" side="LEFT" tickUnit="1.0" upperBound="10.0" />
+               </yAxis>
+            </LineChart>
+            <LineChart fx:id="edf" layoutX="782.0" layoutY="32.0" legendVisible="false" prefHeight="271.0" prefWidth="377.0" title="Емпірична функція розподілу">
+               <xAxis>
+                  <NumberAxis side="BOTTOM" upperBound="1.0" fx:id="xAxis12" />
+               </xAxis>
+               <yAxis>
+                  <NumberAxis autoRanging="false" side="LEFT" tickUnit="0.1" upperBound="1.0" />
+               </yAxis>
             </LineChart>
          </children>
       </Pane>
